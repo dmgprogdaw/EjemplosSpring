@@ -1,0 +1,50 @@
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Autores</title>
+	<style>
+		table, th, td{
+			border: double 2px black;
+			border-collapse: collapse;
+		}
+		th{
+			color:  ligthgreen;
+		}
+		td{
+			color: ligthcoral;
+		}
+	</style>
+</head>
+<body>
+	<h1>Información de Autores</h1>
+	
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Edad</th>
+			<th>Email</th>
+		</tr>
+		<tr th:each="unAutor : ${autor}">
+			<td th:text="${unAutor.id}">Nombre</td>
+			<td th:text="${unAutor.nombre}">Nombre</td>
+			<td th:text="${unAutor.edad}">Edad</td>
+			<td th:text="${unAutor.email}">Email</td>
+		</tr>
+	</table>
+</body>
+</html>
+
+
+
+
+<!-- 
+
+<p th:text="${nombre}">Mi nombre</p>
+<p th:text="${edad}">60</p>
+	
+<p th:text="'Mira un autor en mi web' + ${autor.nombre} + 'bienvenido'">Nombre</p>
+<p th:text="'Autor tu edad es' + ${autor.edad} + 'bienvenido'">Edad</p>
+<p th:text="'Autor tu email es' + ${autor.email} + 'bienvenido'">Email</p>
+	
+ -->

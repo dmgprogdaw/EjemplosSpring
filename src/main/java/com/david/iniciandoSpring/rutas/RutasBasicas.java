@@ -11,10 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RutasBasicas {
 
-	@GetMapping("/inicio")
+	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
-		List<Autor> listaAutores = ListaAutores.construirLista();
+		List<Autor> listaAutores = ListaAutores.getLista();
+		model.addAttribute("autor", listaAutores);
+		
+		return "autor";
+	}
+	
+	@GetMapping("/eliminarAutor/{id}")
+	public String eliminarAutor( @PathVariable Integer id, 
+							Model model) {
+		
+		ListaAutores.del(id);
+		List<Autor> listaAutores = ListaAutores.getLista();
 		model.addAttribute("autor", listaAutores);
 		
 		return "autor";
@@ -27,7 +38,7 @@ public class RutasBasicas {
 		Autor autor = ListaAutores.getAutor(id);
 		model.addAttribute("autor", autor);
 		
-		return "autor";
+		return "hola";
 	}
 	
 	@GetMapping("/comienzo")

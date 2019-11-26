@@ -24,6 +24,10 @@
 		td{
 			color: lightcoral;
 		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
 	</style>
 </head>
 <body>
@@ -35,12 +39,16 @@
 			<th>Nombre</th>
 			<th>Edad</th>
 			<th>Email</th>
+			<th></th>
+			<th></th>
 		</tr>
 		<tr th:each="unAutor : ${autor}">
-			<td th:text="${unAutor.id}">Nombre</td>
+			<td th:text="${unAutor.id} + ' [' + ${unAutorStat.count} + ']'">Nombre</td>
 			<td th:text="${unAutor.nombre}">Nombre</td>
 			<td th:text="${unAutor.edad}">Edad</td>
 			<td th:text="${unAutor.email}">Email</td>
+			<td><a href="#" th:href="@{/autores/{id}(id=${unAutor.id})}">Detalle</a></td>
+			<td><a href="#" th:href="@{/eliminarAutor/{id}(id=${unAutor.id})}">Eliminar</a></td>
 		</tr>
 	</table>
 </body>

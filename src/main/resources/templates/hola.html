@@ -1,17 +1,28 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Autores</title>
+	<title>Hola</title>
 	<style>
+		html, body {
+			heigth: 100%;
+			width: 100%;
+		}
+		h1{
+			text-align: center;
+		}
+		table{
+			width: 50%;
+			margin: auto;
+		}
 		table, th, td{
-			border: double 2px black;
-			border-collapse: collapse;
+			border: double 1px black;
+			text-align: center;
 		}
 		th{
-			color:  ligthgreen;
+			color:  green;
 		}
 		td{
-			color: ligthcoral;
+			color: lightcoral;
 		}
 	</style>
 </head>
@@ -32,6 +43,7 @@
 			<td th:text="${unAutor.email}">Email</td>
 		</tr>
 	</table>
+	<a href="#" th:href="@{/}">Volver a la página principal</a>
 </body>
 </html>
 

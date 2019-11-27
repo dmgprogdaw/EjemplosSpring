@@ -1,52 +1,23 @@
-package com.david.iniciandoSpring.rutas;
+package com.david.iniciandoSpring.bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaAutores {
 	
-	private static ArrayList<Autor> lista = null;
+	private ArrayList<Autor> lista = null;
+	private static ListaAutores listaAutores = null;
 	
 
-	public ListaAutores(){
+	private ListaAutores(){
 		
 		lista = new ArrayList<Autor>();
 		
-		Autor autor1 = new Autor();
-		autor1.setId(getIdNoRepetido());
-		autor1.setNombre("Kubo Tite");
-		autor1.setEdad(40);
-		autor1.setEmail("kuboTite@gmail.com");
-		lista.add(autor1);
-		
-		Autor autor2 = new Autor();
-		autor2.setId(getIdNoRepetido());
-		autor2.setNombre("Mashima Hiro");
-		autor2.setEdad(40);
-		autor2.setEmail("mashimaHiro@gmail.com");
-		lista.add(autor2);
-		
-		Autor autor3 = new Autor();
-		autor3.setId(getIdNoRepetido());
-		autor3.setNombre("Toriyama Akira");
-		autor3.setEdad(40);
-		autor3.setEmail("toriyamaAkira@gmail.com");
-		lista.add(autor3);
-		
-		Autor autor4 = new Autor();
-		autor4.setId(getIdNoRepetido());
-		autor4.setNombre("Oda Eiichirou");
-		autor4.setEdad(40);
-		autor4.setEmail("odaEiichirou@gmail.com");
-		lista.add(autor4);
+
 	}
 	
-	public static List<Autor> getLista(){
+	public List<Autor> getDatos(){
 		
-		if(lista == null) {
-			
-			new ListaAutores();
-		}
 		return lista;
 	}
 	
@@ -55,7 +26,7 @@ public class ListaAutores {
 	 * @param idBuscado
 	 * @return
 	 */
-	public static Autor getAutor(int idBuscado) {
+	public Autor getAutor(int idBuscado) {
 		
 		int dondeEsta = buscarDondeEsta(idBuscado);
 		if(dondeEsta >= 0) {
@@ -69,7 +40,7 @@ public class ListaAutores {
 	 * Borrar objeto
 	 * @param idBuscado
 	 */
-	public static void del(int idBuscado) {
+	public void deleteAutor(int idBuscado) {
 		
 		int dondeEsta = buscarDondeEsta(idBuscado);
 		if(dondeEsta>=0) {
@@ -79,11 +50,32 @@ public class ListaAutores {
 	}
 	
 	/**
+	 * Añade un autor a la lista
+	 * @param autor
+	 */
+	public void addAutor(Autor autor) {
+		
+		autor.setId(getIdNoRepetido());
+		lista.add(autor);
+	}
+	
+	/**
+	 * Actualiza un autor buscando primero su posicion en la lista
+	 * @param autor
+	 */
+	public void updateAutor (Autor autor) {
+		
+		int posicion = buscarDondeEsta(autor.getId());
+		lista.set(posicion, autor);
+	}
+	
+	
+	/**
 	 * 
 	 * @param idBuscado
 	 * @return
 	 */
-	private static int buscarDondeEsta(int idBuscado) {
+	private int buscarDondeEsta(int idBuscado) {
 		
 		// iniciamos con una bandera indicando que no esta encontrado
 		boolean encontrado = false;
@@ -103,8 +95,7 @@ public class ListaAutores {
 		}
 		if(encontrado) return indice; else return -1;
 	}
-	
-	
+
 	private int getIdNoRepetido() {
 		
 		int numeroAleatorio = (int)(Math.random()*100)+1;
@@ -116,5 +107,14 @@ public class ListaAutores {
 		}
 
 		return numeroAleatorio;
+	}
+	
+	public static ListaAutores getLista(){
+		
+		if(listaAutores == null) {
+			
+			listaAutores = new ListaAutores();
+		}
+		return listaAutores;
 	}
 }

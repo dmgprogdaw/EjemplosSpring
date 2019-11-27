@@ -6,13 +6,25 @@
 		html, body {
 			heigth: 100%;
 			width: 100%;
+			margin: 0;
+			background: linear-gradient(to right bottom, lightskyblue, lightcoral);
 		}
 		h1{
 			text-align: center;
 		}
-		table{
+		#tabla{
+			height: 90%;
 			width: 50%;
-			margin: auto;
+			float: left;
+		}
+		nav{
+			height: 90%;
+			width: 10%;
+			float: left;
+			margin-left: 1%;
+		}
+		table{
+			width: 100%;
 		}
 		table, th, td{
 			border: double 1px black;
@@ -21,11 +33,15 @@
 		th{
 			color:  green;
 		}
-		td{
-			color: lightcoral;
+		td:hover{
+			background-color: lightcoral;
+			color: lightgreen;
 		}
 		a{
 			text-decoration: none;
+			color: black;
+		}
+		a:avtive{
 			color: black;
 		}
 	</style>
@@ -33,23 +49,32 @@
 <body>
 	<h1>Información de Autores</h1>
 	
-	<table>
-		<tr>
-			<th>Id</th>
-			<th>Nombre</th>
-			<th>Edad</th>
-			<th>Email</th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr th:each="unAutor : ${autor}">
-			<td th:text="${unAutor.id} + ' [' + ${unAutorStat.count} + ']'">Nombre</td>
-			<td th:text="${unAutor.nombre}">Nombre</td>
-			<td th:text="${unAutor.edad}">Edad</td>
-			<td th:text="${unAutor.email}">Email</td>
-			<td><a href="#" th:href="@{/autores/{id}(id=${unAutor.id})}">Detalle</a></td>
-			<td><a href="#" th:href="@{/eliminarAutor/{id}(id=${unAutor.id})}">Eliminar</a></td>
-		</tr>
-	</table>
+	<main>
+		<section id="tabla">
+			<table>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Edad</th>
+				<th>Email</th>
+				<th>Detalle</th>
+				<th>Borrar</th>
+				<th>Actualizar</th>
+			</tr>
+			<tr th:each="unAutor : ${autor}">
+				<td th:text="${unAutor.id} + ' [' + ${unAutorStat.count} + ']'">Nombre</td>
+				<td th:text="${unAutor.nombre}">Nombre</td>
+				<td th:text="${unAutor.edad}">Edad</td>
+				<td th:text="${unAutor.email}">Email</td>
+				<td><a href="#" th:href="@{/autores/{id}(id=${unAutor.id})}">Detalle</a></td>
+				<td><a href="#" th:href="@{/eliminarAutor/{id}(id=${unAutor.id})}">Eliminar</a></td>
+				<td><a href="#" th:href="@{/actualizarAutor/{id}(id=${unAutor.id})}">Actualizar</a></td>
+			</tr>
+			</table>
+		</section>
+		<nav>
+			<a href="#" th:href="@{/nuevoAutor}"><button>Nuevo Autor</button></a>
+		</nav>
+	</main>
 </body>
 </html>

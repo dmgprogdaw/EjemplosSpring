@@ -1,0 +1,56 @@
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Formulario</title>
+		<style>
+			html, body {
+				heigth: 100%;
+				width: 100%;
+				margin: 0;
+				background: linear-gradient(to right bottom, lightskyblue, lightcoral);
+			}
+			main{
+				height: 90%;
+				width: 90%;
+			}
+			form{
+				width: 50%;
+				margin: auto;
+			}
+			fieldset{
+				border: double 3px black;
+				width: 30%;
+			}
+			#nombre, #edad, #email{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<form action="#" th:action="@{/updateAutor}" th:object="${autor}" method="POST">
+				<fieldset>
+					<legend>Añadir Autor</legend>
+					<input id="id"  type="hidden" th:field="*{id}">
+					<br>
+					<label>Nombre: </label>
+					<br>
+					<input id="nombre" type="text" th:field="*{nombre}">
+					<br>
+					<label>Edad: </label>
+					<br>
+					<input id="edad" type="text" th:field="*{edad}">
+					<br>
+					<label>Email: </label>
+					<br>
+					<input id="email" type="email" th:field="*{email}">
+					<br>
+					<br>
+					<input id="enviar" type="submit" value="Enviar">
+					<br>
+					<input id="reset" type="reset" value="Reset">
+				</fieldset>
+			</form>
+		</main>
+	</body>
+</html>

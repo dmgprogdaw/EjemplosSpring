@@ -5,8 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.david.iniciandoSpring.bean.Autor;
+import com.david.iniciandoSpring.bean.ListaAutores;
 
 @Controller
 public class RutasBasicas {
@@ -14,80 +19,70 @@ public class RutasBasicas {
 	@GetMapping("/")
 	public String rutaBasicaInicial(Model model) {
 		
-		List<Autor> listaAutores = ListaAutores.getLista();
-		model.addAttribute("autor", listaAutores);
+		ListaAutores lista = ListaAutores.getLista();
+		model.addAttribute("autor", lista.getDatos());
 		
 		return "autor";
 	}
 	
 	@GetMapping("/eliminarAutor/{id}")
 	public String eliminarAutor( @PathVariable Integer id, 
-							Model model) {
+								 Model model) {
 		
-		ListaAutores.del(id);
-		List<Autor> listaAutores = ListaAutores.getLista();
-		model.addAttribute("autor", listaAutores);
+		ListaAutores lista = ListaAutores.getLista();
+		lista.deleteAutor(id);
+
 		
-		return "autor";
+		return ("redirect:/");
+	}
+	
+	@GetMapping("/nuevoAutor")
+	public String nuevoAutor(Model model) {
+		
+		model.addAttribute("autor", new Autor());
+		//model.addAttribute("nombre", new String());
+		
+		return "nuevoAutor";
+	}
+	
+
+	@PostMapping("/addAutor")
+	public String addAutor(@ModelAttribute Autor autor) {
+		
+		ListaAutores lista = ListaAutores.getLista();
+		lista.addAutor(autor);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/actualizarAutor/{id}")
+	public String actualizarAutor( @PathVariable Integer id,
+								   Model model) {
+		
+		ListaAutores lista = ListaAutores.getLista();
+		Autor autor = lista.getAutor(id);
+		model.addAttribute("autor", autor);
+		
+		return "actualizarAutor";
+	}
+	
+	@PostMapping("/updateAutor")
+	public String updateAutor(@ModelAttribute Autor autor) {
+		
+		ListaAutores lista = ListaAutores.getLista();
+		lista.updateAutor(autor);
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/autores/{id}")
 	public String verAutor( @PathVariable Integer id, 
 							Model model) {
 		
-		Autor autor = ListaAutores.getAutor(id);
+		ListaAutores lista = ListaAutores.getLista();
+		Autor autor = lista.getAutor(id);
 		model.addAttribute("autor", autor);
 		
 		return "hola";
-	}
-	
-	@GetMapping("/comienzo")
-	public String rutaCero(@RequestParam(required=false) Integer id, 
-						   @RequestParam(required=false) String nombre) {
-		
-		System.out.println("El id: " + id);
-		System.out.println("El nombre: " + nombre);
-		
-		return "hola";
-	}
-	
-	@GetMapping("/ichi")
-	public String rutaUno() {
-		
-		System.out.println("Eres un pringado x 1");
-		
-		return "200";
-	}
-	
-	@GetMapping("/ichi/ni")
-	public String rutaDos() {
-		
-		System.out.println("Eres un pringado x 2");
-		
-		return "200";
-	}
-	
-	@GetMapping("/ichi/ni/san")
-	public String rutaTres() {
-		
-		System.out.println("Eres un pringado x 3");
-		
-		return "200";
-	}
-	
-	@GetMapping("/ichi/ni/san/shi")
-	public String rutaCuatro() {
-		
-		System.out.println("Eres un pringado x 4");
-		
-		return "200";
-	}
-	
-	@GetMapping("/ichi/ni/san/shi/go")
-	public String rutaCinco() {
-		
-		System.out.println("Eres un pringado x 5");
-		
-		return "200";
 	}
 }

@@ -1,4 +1,4 @@
-package com.david.iniciandoSpring.rutas;
+package com.david.iniciandoSpring.bean;
 
 public class Autor {
 

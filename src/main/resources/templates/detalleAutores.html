@@ -6,13 +6,13 @@
 		html, body {
 			heigth: 100%;
 			width: 100%;
+			background: linear-gradient(to right bottom, lightskyblue, lightcoral);
 		}
 		h1{
 			text-align: center;
 		}
 		table{
 			width: 50%;
-			margin: auto;
 		}
 		table, th, td{
 			border: double 1px black;
@@ -35,28 +35,16 @@
 			<th>Nombre</th>
 			<th>Edad</th>
 			<th>Email</th>
+			<th>Coche</th>
 		</tr>
 		<tr th:each="unAutor : ${autor}">
 			<td th:text="${unAutor.id}">Nombre</td>
 			<td th:text="${unAutor.nombre}">Nombre</td>
 			<td th:text="${unAutor.edad}">Edad</td>
 			<td th:text="${unAutor.email}">Email</td>
+			<td th:each="coche: ${coches}" th:if="${coche.id} == ${unAutor.coche}" th:text="${coche.marca}">Coche</td>
 		</tr>
 	</table>
-	<a href="#" th:href="@{/}">Volver a la página principal</a>
+	<a href="#" th:href="@{/}"><button>Volver a la página principal</button></a>
 </body>
 </html>
-
-
-
-
-<!-- 
-
-<p th:text="${nombre}">Mi nombre</p>
-<p th:text="${edad}">60</p>
-	
-<p th:text="'Mira un autor en mi web' + ${autor.nombre} + 'bienvenido'">Nombre</p>
-<p th:text="'Autor tu edad es' + ${autor.edad} + 'bienvenido'">Edad</p>
-<p th:text="'Autor tu email es' + ${autor.email} + 'bienvenido'">Email</p>
-	
- -->

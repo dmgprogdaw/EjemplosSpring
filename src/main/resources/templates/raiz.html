@@ -1,0 +1,50 @@
+<html xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <style>
+      html, body{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        background: linear-gradient(to right bottom, lightskyblue, lightcoral);
+      }
+      header{
+        height: 10%;
+        width: 100%;
+        text-align: center;
+      }
+      nav{
+        height: 90%;
+        width: 50%;
+        margin: auto;
+      }
+      article{
+        height: 20%;
+        width: 90%;
+        margin: 0 auto 10% auto;
+        border: double 10px black;
+        text-align: center;
+        font-size: 100px;
+      }
+      a{
+        text-decoration: none;
+        color: black;
+      }
+      article:hover{
+        background-color: lightcoral;
+        color: lightgreen;
+      }
+      article:hover a{
+        color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1 th:text="#{hola.title}"></h1></header>
+    <nav>
+      <article><a href="#" th:href="@{/autores}">AUTORES</a></article>
+      <article><a href="#" th:href="@{/coches}">COCHES</a></article>
+    </nav>
+  </body>
+</html>

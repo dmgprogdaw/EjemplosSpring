@@ -20,6 +20,7 @@
 			fieldset{
 				border: double 3px black;
 				width: 30%;
+				margin-bottom: 1%;
 			}
 			#nombre, #edad, #email{
 				width: 100%;
@@ -33,22 +34,49 @@
 					<legend>Añadir Autor</legend>
 					<label>Nombre: </label>
 					<br>
-					<input id="nombre" type="text" th:field="*{nombre}">
+					<input id="nombre" type="text" th:field="*{nombre}" placeholder="Inserta el nombre" pattern="[A-ZÁÉÍÓÚ]{1}[a-záéíóú]{2,20}" required>
 					<br>
 					<label>Edad: </label>
 					<br>
-					<input id="edad" type="text" th:field="*{edad}">
+					<input id="edad" type="number" th:field="*{edad}" placeholder="Inserta la edad" maxLength="3" required>
 					<br>
 					<label>Email: </label>
 					<br>
-					<input id="email" type="email" th:field="*{email}">
+					<input id="email" type="email" th:field="*{email}" placeholder="Inserta el email" required>
+				</fieldset>
+				<fieldset>
+					<legend>Descripcion</legend>
+					<textarea id="textArea" name="textArea" th:field="*{descripcion}"></textarea>
+				</fieldset>
+				<fieldset>
+					<legend>Sexo</legend>
+					<input id="hombre" name="sexo" type="radio" value="Hombre" th:field="*{sexo}" required>
+					<label>Hombre</label>
 					<br>
+					<input id="mujer" name="sexo" type="radio" value="Mujer" th:field="*{sexo}" required>
+					<label>Mujer</label>
+				</fieldset>
+				<fieldset>
+					<legend>Informacion Coche</legend>
+					<input type="checkbox" name="carnet" id="carnet" value="coche" th:field="*{carnet}">
+					<label>Carnet de conducir</label>
 					<br>
+					<select id="coche" name="coche" th:field="*{coche}" required>
+						<option th:each="cocheOpt: ${coches}" th:value="${cocheOpt.id}" th:text="${cocheOpt.marca}" />
+					</select>
+				</fieldset>
+				<fieldset>
+					<label>Barrita:</label>
+					<br>
+					<input type="range" id="point" name="point" min="0" max="10" th:field="*{barrita}">
+				</fieldset>
+				<fieldset>
 					<input id="enviar" type="submit" value="Enviar">
 					<br>
 					<input id="reset" type="reset" value="Reset">
 				</fieldset>
 			</form>
+			<a href="#" th:href="@{/autores}"><button>Volver a autores</button></a>
 		</main>
 	</body>
 </html>

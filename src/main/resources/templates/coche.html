@@ -1,7 +1,7 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Autores</title>
+  <title>Coches</title>
   <style>
     html, body {
       height: 100vh;
@@ -11,7 +11,7 @@
     }
     header{
       height: 20%;
-      width: 100%;
+      width: 80%;
       float: left;
       text-align: center;
     }
@@ -20,7 +20,7 @@
       font-size: 50px;
     }
     nav{
-      height: 30%;
+      height: 20%;
       width: 20%;
       float: left;
     }
@@ -77,50 +77,61 @@
     a:active{
       color: black;
     }
+
+    #formulario{
+      height: 80%;
+      width: 30%;
+      float: left;
+    }
+
+    form{
+      height: 50%;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <header id="cabezera1"><h1 th:text="#{hola.title}">Hola</h1></header>
+  <nav>
+    <a href="#" th:href="@{/}"><article>Volver a la página principal</article></a>
+  </nav>
   <main>
     <section id="tabla">
       <table>
       <tr>
         <th>Id</th>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Sexo</th>
-        <th>Email</th>
-        <th>Descripcion</th>
-        <th>Barrita</th>
-        <th>Carnet</th>
-        <th>Coche</th>
+        <th>Marca</th>
         <th>Detalle</th>
         <th>Borrar</th>
         <th>Actualizar</th>
       </tr>
-      <tr th:each="unAutor : ${autor}">
-        <td th:text="${unAutor.id} + ' [' + ${unAutorStat.count} + ']'">Nombre</td>
-        <td th:text="${unAutor.nombre}">Nombre</td>
-        <td th:text="${unAutor.edad}">Edad</td>
-        <td th:text="${unAutor.sexo}">Sexo</td>
-        <td th:text="${unAutor.email}">Email</td>
-        <td th:text="${unAutor.descripcion}">Descripcion</td>
-        <td th:text="${unAutor.barrita}">Barrita</td>
-          
-        <td th:if="${unAutor.carnet}" th:text="'Tiene carnet'">Carnet</td>
-        <td th:unless="${unAutor.carnet}" th:text="'No tiene carnet'">Carnet</td>
-          
-        <td th:each="coche: ${coches}" th:if="${coche.id} == ${unAutor.coche}" th:text="${coche.marca}">Coche</td>
-        <td><a href="#" th:href="@{/autores/{id}(id=${unAutor.id})}">Detalle</a></td>
-        <td><a href="#" th:href="@{/eliminarAutor/{id}(id=${unAutor.id})}">Eliminar</a></td>
-        <td><a href="#" th:href="@{/actualizarAutor/{id}(id=${unAutor.id})}">Actualizar</a></td>
+      <tr th:each="unCoche : ${coche}">
+        <td th:text="${unCoche.id} + ' [' + ${unCocheStat.count} + ']'">Nombre</td>
+        <td th:text="${unCoche.marca}">Marca</td>
+        <td><a href="#" th:href="">Detalle</a></td>
+        <td><a href="#" th:href="">Eliminar</a></td>
+        <td><a href="#" th:href="">Actualizar</a></td>
       </tr>
       </table>
     </section>
   </main>
-  <nav>
-    <a href="#" th:href="@{/}"><article>Volver a la página principal</article></a>
-    <a href="#" th:href="@{/nuevoAutor}"><article>Insertar Autor</article></a>
-  </nav>
+  <section id="formulario">
+    <form action="#" th:action="@{/addCoche}" th:object="${coches}" method="POST">
+      <fieldset>
+      	<legend>Añadir Coche</legend>
+      	<label>Id: </label>
+		<input id="id" type="number" th:field="*{id}" placeholder="Inserta el id">
+		<br>
+		<label>Marca: </label>
+		<br>
+		<input id="marca" type="text" th:field="*{marca}" placeholder="Inserta la marca">
+      </fieldset>
+      <fieldset>
+        <input id="enviar" type="submit" value="Enviar">
+		<br>
+		<input id="reset" type="reset" value="Reset">
+      </fieldset>
+    </form>
+  </section>
 </body>
 </html>
